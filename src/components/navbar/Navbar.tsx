@@ -1,5 +1,16 @@
-import {Box, Flex, Heading, HStack, IconButton, Image, Stack, useColorModeValue, useDisclosure} from '@chakra-ui/react'
-import {CloseIcon, HamburgerIcon, InfoOutlineIcon} from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Image,
+  Stack,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure
+} from '@chakra-ui/react'
+import {CloseIcon, HamburgerIcon, InfoOutlineIcon, MoonIcon, SunIcon} from '@chakra-ui/icons'
 import React from "react";
 
 
@@ -30,6 +41,7 @@ const NavLink = (props: Props) => {
 }
 
 export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode()
   const {isOpen, onOpen, onClose} = useDisclosure()
 
   return (
@@ -55,7 +67,7 @@ export default function Navbar() {
               ))}
             </HStack>
           </HStack>
-          <IconButton icon={<InfoOutlineIcon/>} aria-label={'outlineIcon'} />
+          <IconButton icon={colorMode === 'light' ? <MoonIcon/> : <SunIcon/>} onClick={toggleColorMode} aria-label='Toggle dark or light mode'/>
         </Flex>
 
         {isOpen ? (

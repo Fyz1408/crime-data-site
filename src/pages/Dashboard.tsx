@@ -55,7 +55,7 @@ export class Dashboard extends React.Component<IProps, IState> {
   render() {
     return (
       <>
-        <Flex h='80vh' backgroundColor='blackAlpha.200'>
+        <Flex h='100vh' backgroundColor='blackAlpha.200'>
           <Center w='100%' flexDir='column' mt={5}>
             <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref} width="100" height="100"/>
           </Center>
