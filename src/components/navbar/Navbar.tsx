@@ -4,13 +4,12 @@ import {
   Heading,
   HStack,
   IconButton,
-  Image,
   Stack,
   useColorMode,
   useColorModeValue,
   useDisclosure
 } from '@chakra-ui/react'
-import {CloseIcon, HamburgerIcon, InfoOutlineIcon, MoonIcon, SunIcon} from '@chakra-ui/icons'
+import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from '@chakra-ui/icons'
 import React from "react";
 
 
@@ -19,7 +18,7 @@ interface Props {
   href: string
 }
 
-const Links = ['Home', 'Dashboard']
+const Links = ['Home', 'Dashboard', 'Diagrams']
 
 const NavLink = (props: Props) => {
   const {children, href} = props
