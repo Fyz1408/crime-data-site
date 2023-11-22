@@ -1,7 +1,4 @@
 # Crime data analysis site
-
-
--------------
 ## Available Scripts
 
 In the project directory, you can run:
