@@ -1,18 +1,29 @@
 import React, {useEffect, useState} from "react";
 import {
-  Box, Button, ButtonGroup, Card, CardBody, CardFooter,
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
   CardHeader,
   Center,
-  Flex, Heading, Input, SimpleGrid, Stack, StackDivider,
+  Flex,
+  Heading,
+  Input,
+  SimpleGrid,
+  Stack,
+  StackDivider,
   Table,
   TableCaption,
   TableContainer,
   Tbody,
-  Td, Text,
-  Tfoot,
+  Td,
+  Text,
   Th,
   Thead,
-  Tr, useToast
+  Tr,
+  useToast
 } from "@chakra-ui/react";
 import './styling/DashboardStyles.scss'
 import DataTable, {TableColumn} from "react-data-table-component";
@@ -150,7 +161,7 @@ function Dashboard() {
                         <Th> Mail</Th>
                       </Tr>
                     </Thead>
-                    {users ? (
+                    {users && users.length > 0 ? (
                       <Tbody>
                         {users.map((user, index) => (
                           <Tr key={index}>

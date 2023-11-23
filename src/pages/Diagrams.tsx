@@ -60,7 +60,7 @@ export class Diagrams extends Component<IProps, IState> {
   render() {
     return (
       <>
-        <Flex h='100vh' backgroundColor='blackAlpha.200'>
+        <Flex h='100vh'>
           <Center w='100%' flexDir='column' mt={5}>
             <Map data={this.geoJson} width={1100} height={1000}/>
           </Center>

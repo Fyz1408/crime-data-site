@@ -7,6 +7,7 @@ import Navbar from "./components/navbar/Navbar";
 import {Footer} from "./components/footer/Footer";
 import Dashboard from "./pages/Dashboard";
 import {Diagrams} from "./pages/Diagrams";
+import theme from "./theme";
 
 interface IProps {
 }
@@ -18,7 +19,7 @@ class App extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <>
           <BrowserRouter>
             <Navbar/>
