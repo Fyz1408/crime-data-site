@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import {FeatureCollection} from "geojson";
+import './Map.css'
 
 type MapProps = {
   width: number;
@@ -10,7 +11,7 @@ type MapProps = {
 export const Map = ({ width, height, data }: MapProps) => {
   const projection = d3
     .geoMercator()
-    .scale(1000)
+    .scale(900)
     .center([-95, 45.86])
 
   const geoPathGenerator = d3.geoPath().projection(projection);
@@ -29,9 +30,10 @@ export const Map = ({ width, height, data }: MapProps) => {
       );
     });
 
+
   return (
-    <div>
-      <svg width={width} height={height}>
+    <div id='chart'>
+      <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} preserveAspectRatio="xMinYMid">
         {allSvgPaths}
       </svg>
     </div>
