@@ -19,7 +19,9 @@ import {
   Text, useColorModeValue
 } from "@chakra-ui/react";
 import news from "../images/news.jpg";
+import mugshot from "../images/mugshot.jpg";
 import './styling/FrontpageStyles.scss';
+import ApexChart from "../components/graphs/ApexChart";
 
 function Frontpage() {
   function getTodaysDate() {
@@ -67,7 +69,7 @@ function Frontpage() {
           </CardHeader>
           <CardBody>
             <Image
-              border='solid lightgray'
+              border='solid #fbf2f3'
               src={news}
               alt='Organized crime kingpin Gregory Woolley gunned down near Montreal'
               borderRadius='lg'
@@ -93,56 +95,76 @@ function Frontpage() {
             </Text>
           </CardHeader>
           <CardBody>
-            <Text> We've added some new diagrams to the dashboard check them out here!</Text>
+            <ApexChart/>
+            <Text color={useColorModeValue('blackAlpha.600', 'gray.400')} fontSize='medium'>
+              We've added some new diagrams to the dashboard check them out here!
+            </Text>
           </CardBody>
           <CardFooter>
-            <Button>View here</Button>
+            <Button>Login here</Button>
           </CardFooter>
         </Card>
         <Card>
           <CardHeader>
-            <Heading size='xl'> Diagrams </Heading>
+            <Heading size='xl'> Latest arrest </Heading>
             <Divider/>
             <Text color={useColorModeValue('blue.500', 'blue.300')} fontSize='medium'>
               {getTodaysDate()}
             </Text>
           </CardHeader>
           <CardBody>
-            <Text>View a summary of all your customers over the last month.</Text>
+            <Image
+              border='solid #fbf2f3'
+              src={mugshot}
+              alt='Recent mugshots of arrest in the past month'
+              borderRadius='lg'
+            />
+            <Text color={useColorModeValue('blackAlpha.600', 'gray.400')} fontSize='medium'>
+              Samuel Parker (age 46), Caleb Williams (age 31), Jackson Mitchell (age 21) and Sophia Evans (age 31) was arrested in the past week.
+            </Text>
           </CardBody>
           <CardFooter>
-            <Button>View here</Button>
+            <Button> See more arrest here</Button>
           </CardFooter>
         </Card>
       </SimpleGrid>
-      <Flex h='100vh'>
+
+      <Divider mt={10}/>
+
+      <Flex h='70vh'>
+
+      </Flex>
+
+      <Divider mt={10}/>
+
+      <Flex h='70vh'>
         <Center w='100%'>
-          <Card w='50%' h='auto' p={2}>
-            <FormControl>
-              <CardHeader>
-                <Heading size='lg'> Contact us </Heading>
-              </CardHeader>
-              <CardBody>
-                <FormLabel>Name</FormLabel>
-                <Input type='text' placeholder='Enter name'/>
+            <Card h='auto' minW='320px' maxW='1000px' w='100%' p={2} mr={6} ml={6}>
+              <FormControl>
+                <CardHeader>
+                  <Heading size='lg'> Contact us </Heading>
+                </CardHeader>
+                <CardBody>
+                  <FormLabel>Name</FormLabel>
+                  <Input type='text' placeholder='Enter name'/>
 
-                <FormLabel mt={3}>Email address</FormLabel>
-                <Input type='email' placeholder='Enter email'/>
+                  <FormLabel mt={3}>Email address</FormLabel>
+                  <Input type='email' placeholder='Enter email'/>
 
-                <FormLabel mt={3}> Message </FormLabel>
-                <Input type='text' minH='15vh' placeholder='Enter your message here'/>
-              </CardBody>
-              <CardFooter>
-                <Button
-                  mt={4}
-                  colorScheme='teal'
-                  type='submit'
-                >
-                  Submit
-                </Button>
-              </CardFooter>
-            </FormControl>
-          </Card>
+                  <FormLabel mt={3}> Message </FormLabel>
+                  <Input type='text' minH='15vh' placeholder='Enter your message here'/>
+                </CardBody>
+                <CardFooter>
+                  <Button
+                    mt={4}
+                    colorScheme='yellow'
+                    type='submit'
+                  >
+                    Submit
+                  </Button>
+                </CardFooter>
+              </FormControl>
+            </Card>
         </Center>
       </Flex>
     </>

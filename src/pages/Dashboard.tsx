@@ -65,28 +65,6 @@ function Dashboard() {
       setName("");
     }
   }
-  const columns: TableColumn<DataRow>[] = [
-    {
-      name: 'Title',
-      selector: row => row.title,
-    },
-    {
-      name: 'Year',
-      selector: row => row.year,
-    },
-  ];
-  const data = [
-    {
-      id: 1,
-      title: 'Beetlejuice',
-      year: '1988',
-    },
-    {
-      id: 2,
-      title: 'Ghostbusters',
-      year: '1984',
-    },
-  ]
   const fetchData = async () => {
     const data = await fetch('http://localhost:5001/users');
     data.json().then(r => setUsers(r))
@@ -97,6 +75,10 @@ function Dashboard() {
 
   return (
     <>
+      <Flex h='100vh'>
+
+      </Flex>
+
       <Flex h='100vh'>
         <Center w='100%' flexDir='column' mt={5}>
           <SimpleGrid columns={2} spacing={10}>
@@ -180,14 +162,7 @@ function Dashboard() {
               </CardBody>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <Heading size='md'> Another table </Heading>
-              </CardHeader>
-              <CardBody>
-                <DataTable columns={columns} data={data}/>
-              </CardBody>
-            </Card>
+
           </SimpleGrid>
         </Center>
       </Flex>
