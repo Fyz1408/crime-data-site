@@ -15,13 +15,14 @@ import './NavbarStyle.css';
 
 interface Props {
   children: React.ReactNode,
-  href: string
+  href: string,
+  isActive: boolean,
 }
 
-const Links = ['Home', 'Dashboard', 'Diagrams']
+const Links = ['Home', 'Dashboard', 'Map', 'Administration']
 
 const NavLink = (props: Props) => {
-  const {children, href} = props
+  const {children, href, isActive} = props
 
   return (
     <Box
@@ -29,6 +30,7 @@ const NavLink = (props: Props) => {
       px={2}
       py={1}
       rounded={'md'}
+      className={isActive ? 'bold' : ''}
       _hover={{
         textDecoration: 'none',
         bg: useColorModeValue('gray.200', 'gray.700'),
@@ -42,7 +44,7 @@ const NavLink = (props: Props) => {
 export default function Navbar() {
   const {colorMode, toggleColorMode} = useColorMode()
   const {isOpen, onOpen, onClose} = useDisclosure()
-
+  const path = window.location.pathname;
 
   return (
     <>
@@ -52,47 +54,59 @@ export default function Navbar() {
         w='100%'
         zIndex={200}
       >
-          <Flex
-            px={4}
-            h={16}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-          >
-            <IconButton
-              size={'md'}
-              icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
-              aria-label={'Open Menu'}
-              display={{md: 'none'}}
-              onClick={isOpen ? onClose : onOpen}
-            />
-            <HStack spacing={8} alignItems={'center'}>
-              <Flex flexDir='row' w='20vh'>
-                <Heading size='md'>
-                  Crime Analysis
-                </Heading>
-              </Flex>
-              <HStack as={'nav'} spacing={4} display={{base: 'none', md: 'flex'}}>
-                {Links.map((link) => (
-                  <NavLink key={link} href={link.toLowerCase()}>{link}</NavLink>
-                ))}
-              </HStack>
+        <Flex
+          px={4}
+          h={16}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+        >
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
+            aria-label={'Open Menu'}
+            display={{md: 'none'}}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <Flex flexDir='row' w='20vh'>
+              <Heading size='md'>
+                Crime Analysis
+              </Heading>
+            </Flex>
+            <HStack as={'nav'} spacing={4} display={{base: 'none', md: 'flex'}}>
+              {Links.map((link) => (
+                <NavLink
+                  key={link}
+                  href={link.toLowerCase()}
+                  isActive={'/' + link.toLowerCase() === path}
+                >
+                  {link}
+                </NavLink>
+              ))}
             </HStack>
-            <IconButton
-              icon={colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
-              onClick={toggleColorMode}
-              aria-label='Toggle dark or light mode'
-            />
-          </Flex>
+          </HStack>
+          <IconButton
+            icon={colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
+            onClick={toggleColorMode}
+            aria-label='Toggle dark or light mode'
+          />
+        </Flex>
 
-          {isOpen ? (
-            <Box pb={4} display={{md: 'none'}}>
-              <Stack as={'nav'} spacing={4}>
-                {Links.map((link) => (
-                  <NavLink key={link} href={link.toLowerCase()}>{link}</NavLink>
-                ))}
-              </Stack>
-            </Box>
-          ) : null}
+        {isOpen ? (
+          <Box pb={4} display={{md: 'none'}}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink
+                  key={link}
+                  href={link.toLowerCase()}
+                  isActive={'/' + link.toLowerCase() === path}
+                >
+                  {link}
+                </NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
         <Flex className='crimeTape'></Flex>
       </Box>
     </>
