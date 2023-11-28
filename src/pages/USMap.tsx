@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Center, Divider, Flex} from "@chakra-ui/react";
+import {Center, Divider, Flex, Heading} from "@chakra-ui/react";
 import * as d3 from "d3";
 import {Map} from "../components/graphs/Map"
 import {FeatureCollection} from "geojson";
@@ -12,7 +12,7 @@ interface IProps {
 interface IState {
 }
 
-export class Diagrams extends Component<IProps, IState> {
+export class USMap extends Component<IProps, IState> {
   ref!: SVGSVGElement;
 
   // @ts-ignore
@@ -60,6 +60,15 @@ export class Diagrams extends Component<IProps, IState> {
   render() {
     return (
       <>
+        <Flex h='10vh'></Flex>
+        <Flex flexDir='column'>
+          <Center>
+            <Heading size='xl'>
+              Map overview of crime
+            </Heading>
+          </Center>
+          <Divider mt={3}/>
+        </Flex>
         <Flex h='100vh'>
           <Center w='100%' flexDir='column' mt={5}>
             <Map data={this.geoJson} width={1100} height={1000}/>
