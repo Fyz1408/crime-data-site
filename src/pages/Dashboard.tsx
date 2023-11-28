@@ -1,32 +1,29 @@
 import React, {useEffect, useState} from "react";
 import {
   Box,
-  Button,
-  ButtonGroup,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Center,
+  Divider,
   Flex,
   Heading,
-  Input,
   SimpleGrid,
-  Stack,
-  StackDivider,
   Table,
   TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
   useToast
 } from "@chakra-ui/react";
 import './styling/DashboardStyles.scss'
-import DataTable, {TableColumn} from "react-data-table-component";
+import {Crime} from "../types/crimeTypes";
+import ReactApexChart from "react-apexcharts";
+import {ApexOptions} from "apexcharts";
+import DonutChart from "../components/graphs/DonutChart";
 
 interface DataRow {
   title: string;
@@ -34,136 +31,130 @@ interface DataRow {
 }
 
 function Dashboard() {
-  const [users, setUsers] = useState<any[]>([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [donutArray, setDonutArray] = useState<number[]>([]);
+  const [crimeCount, setCrimeCount] = useState<number>(0);
+  const [crimes, setCrimes] = useState<Crime[]>([]);
   const toast = useToast()
 
-  const handleOnSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    let result = await fetch(
-      'http://localhost:5001/register', {
-        method: "post",
-        body: JSON.stringify({name, email}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    result = await result.json();
-    console.warn(result);
-    if (result) {
-      fetchData();
-      toast({
-        title: 'Data saved succesfully.',
-        description: "A user was created",
-        position: 'bottom',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      })
-      setEmail("");
-      setName("");
-    }
+  const fetchCrime = async () => {
+    const data = await fetch('http://localhost:5001/crime');
+    data.json().then(r => setCrimes(r))
   }
-  const fetchData = async () => {
-    const data = await fetch('http://localhost:5001/users');
-    data.json().then(r => setUsers(r))
+
+  const fetchCrimeVictims = async () => {
+    const data = await fetch('http://localhost:5001/crime/genders');
+    data.json().then(res => {
+      if (res.length > 0) {
+        let arr = []
+        arr.push(res[0].femaleVict[0].count)
+        arr.push(res[0].maleVict[0].count)
+        arr.push(res[0].other[0].count)
+
+        setDonutArray(arr)
+      }
+    })
   }
+
   useEffect(() => {
-    fetchData().catch(console.error);
+    fetchCrime().catch(console.error);
+    fetchCrimeVictims().catch(console.error);
   }, [])
+
+  const chartOptions: ApexOptions = {
+    chart: {
+      type: 'bar',
+    },
+    stroke: {
+      curve: 'smooth',
+    },
+    series: [
+      {
+        name: 'Series 1',
+        data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+      },
+    ],
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    },
+  };
 
   return (
     <>
-      <Flex h='100vh'>
+      <Flex h='10vh'></Flex>
+      <Flex flexDir='column'>
+        <Center>
+          <Heading size='xl'>
+            Dashboard
+          </Heading>
+        </Center>
 
+        <Divider mt={3}/>
+
+        <SimpleGrid minChildWidth='320px' spacing='40px' mt={10} mr={7} ml={7}>
+
+          <Box>
+            <Heading size='md'>
+              Victims gender
+            </Heading>
+            <DonutChart data={donutArray} labels={['Female', 'Male', 'Other']}/>
+          </Box>
+
+          <ReactApexChart
+            options={chartOptions}
+            series={chartOptions.series}
+            type='bar'
+            height={350}
+          />
+          <ReactApexChart
+            options={chartOptions}
+            series={chartOptions.series}
+            type='line'
+            height={350}
+          />
+        </SimpleGrid>
       </Flex>
 
-      <Flex h='100vh'>
-        <Center w='100%' flexDir='column' mt={5}>
-          <SimpleGrid columns={2} spacing={10}>
-            <Card size='md'>
-              <form action="">
-                <CardHeader>
-                  <Heading as='h2'>
-                    Create a user
-                  </Heading>
-                </CardHeader>
-                <CardBody>
-                  <Stack divider={<StackDivider/>} spacing='4'>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        Enter name
-                      </Heading>
-                      <Text pt='2' fontSize='sm'>
-                        <Input
-                          type='text'
-                          placeholder="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Heading size='xs' textTransform='uppercase'>
-                        Enter email
-                      </Heading>
-                      <Text pt='2' fontSize='sm'>
-                        <Input
-                          type='email'
-                          placeholder="Email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                      </Text>
-                    </Box>
-                  </Stack>
-                </CardBody>
-                <CardFooter>
-                  <ButtonGroup spacing='2'>
-                    <Button type="submit" onClick={handleOnSubmit} colorScheme='green'>
-                      Submit
-                    </Button>
-                  </ButtonGroup>
-                </CardFooter>
-              </form>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Heading size='md'> User table</Heading>
-              </CardHeader>
-              <CardBody>
-                <TableContainer>
-                  <Table variant='striped'>
-                    <TableCaption> Users </TableCaption>
-                    <Thead>
-                      <Tr>
-                        <Th> ID </Th>
-                        <Th> Name </Th>
-                        <Th> Mail</Th>
-                      </Tr>
-                    </Thead>
-                    {users && users.length > 0 ? (
-                      <Tbody>
-                        {users.map((user, index) => (
-                          <Tr key={index}>
-                            <Td> {user._id} </Td>
-                            <Td> {user.name} </Td>
-                            <Td> {user.email} </Td>
-                          </Tr>
-                        ))}
-                      </Tbody>
-                    ) : (
-                      <Tbody>
-                      </Tbody>
-                    )}
-                  </Table>
-                </TableContainer>
-              </CardBody>
-            </Card>
+      <Divider/>
 
-
-          </SimpleGrid>
+      <Flex flexDir='column' mt={10} mb={10}>
+        <Center>
+          <Card>
+            <CardHeader>
+              <Heading as='h2'>
+                Crime table
+              </Heading>
+            </CardHeader>
+            <CardBody>
+              <TableContainer>
+                <Table variant='striped'>
+                  <TableCaption> Crime </TableCaption>
+                  <Thead>
+                    <Tr>
+                      <Th> ID </Th>
+                      <Th> Crime desc </Th>
+                      <Th> Weapon Desc </Th>
+                      <Th> Location </Th>
+                    </Tr>
+                  </Thead>
+                  {crimes && crimes.length > 0 ? (
+                    <Tbody>
+                      {crimes.map((crime, index) => (
+                        <Tr key={index}>
+                          <Td> {crime._id} </Td>
+                          <Td> {crime["Crm Cd Desc"]} </Td>
+                          <Td> {crime["Weapon Desc"]} </Td>
+                          <Td> {crime.LOCATION} </Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  ) : (
+                    <Tbody>
+                    </Tbody>
+                  )}
+                </Table>
+              </TableContainer>
+            </CardBody>
+          </Card>
         </Center>
       </Flex>
     </>
