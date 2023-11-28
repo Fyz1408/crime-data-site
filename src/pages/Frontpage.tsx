@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -16,7 +16,8 @@ import {
   Input,
   SimpleGrid,
   Stack,
-  Text, useColorModeValue
+  Text,
+  useColorModeValue
 } from "@chakra-ui/react";
 import news from "../images/news.jpg";
 import mugshot from "../images/mugshot.jpg";
@@ -86,6 +87,7 @@ function Frontpage() {
             <Button>Read more here</Button>
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <Heading size='xl'> Dashboard </Heading>
@@ -104,6 +106,7 @@ function Frontpage() {
             <Button>Login here</Button>
           </CardFooter>
         </Card>
+
         <Card>
           <CardHeader>
             <Heading size='xl'> Latest arrest </Heading>
@@ -120,51 +123,54 @@ function Frontpage() {
               borderRadius='lg'
             />
             <Text color={useColorModeValue('blackAlpha.600', 'gray.400')} fontSize='medium'>
-              Samuel Parker (age 46), Caleb Williams (age 31), Jackson Mitchell (age 21) and Sophia Evans (age 31) was arrested in the past week.
+              Samuel Parker (age 46), Caleb Williams (age 31), Jackson Mitchell (age 21) and Sophia Evans (age 31) was
+              arrested in the past week.
             </Text>
           </CardBody>
           <CardFooter>
             <Button> See more arrest here</Button>
           </CardFooter>
         </Card>
+
       </SimpleGrid>
 
       <Divider mt={10}/>
 
-      <Flex h='70vh'>
-
+      <Flex h='70vh' alignItems='center' placeContent='center'>
+        <Box bg='blackAlpha.300' h='90%' w='90%' m={15}>
+        </Box>
       </Flex>
 
       <Divider mt={10}/>
 
       <Flex h='70vh'>
         <Center w='100%'>
-            <Card h='auto' minW='320px' maxW='1000px' w='100%' p={2} mr={6} ml={6}>
-              <FormControl>
-                <CardHeader>
-                  <Heading size='lg'> Contact us </Heading>
-                </CardHeader>
-                <CardBody>
-                  <FormLabel>Name</FormLabel>
-                  <Input type='text' placeholder='Enter name'/>
+          <Card h='auto' minW='320px' maxW='1000px' w='100%' p={2} mr={6} ml={6}>
+            <FormControl>
+              <CardHeader>
+                <Heading size='lg'> Contact us </Heading>
+              </CardHeader>
+              <CardBody>
+                <FormLabel>Name</FormLabel>
+                <Input type='text' placeholder='Enter name'/>
 
-                  <FormLabel mt={3}>Email address</FormLabel>
-                  <Input type='email' placeholder='Enter email'/>
+                <FormLabel mt={3}>Email address</FormLabel>
+                <Input type='email' placeholder='Enter email'/>
 
-                  <FormLabel mt={3}> Message </FormLabel>
-                  <Input type='text' minH='15vh' placeholder='Enter your message here'/>
-                </CardBody>
-                <CardFooter>
-                  <Button
-                    mt={4}
-                    colorScheme='yellow'
-                    type='submit'
-                  >
-                    Submit
-                  </Button>
-                </CardFooter>
-              </FormControl>
-            </Card>
+                <FormLabel mt={3}> Message </FormLabel>
+                <Input type='text' minH='15vh' placeholder='Enter your message here'/>
+              </CardBody>
+              <CardFooter>
+                <Button
+                  mt={4}
+                  colorScheme='yellow'
+                  type='submit'
+                >
+                  Submit
+                </Button>
+              </CardFooter>
+            </FormControl>
+          </Card>
         </Center>
       </Flex>
     </>
