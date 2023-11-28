@@ -24,6 +24,7 @@ import {Crime} from "../types/crimeTypes";
 import ReactApexChart from "react-apexcharts";
 import {ApexOptions} from "apexcharts";
 import DonutChart from "../components/graphs/DonutChart";
+import {API_URL} from "../config/constants";
 
 interface DataRow {
   title: string;
@@ -37,12 +38,12 @@ function Dashboard() {
   const toast = useToast()
 
   const fetchCrime = async () => {
-    const data = await fetch('http://localhost:5001/crime');
+    const data = await fetch(API_URL + '/crime');
     data.json().then(r => setCrimes(r))
   }
 
   const fetchCrimeVictims = async () => {
-    const data = await fetch('http://localhost:5001/crime/genders');
+    const data = await fetch(API_URL + '/crime/genders');
     data.json().then(res => {
       if (res.length > 0) {
         let arr = []

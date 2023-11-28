@@ -27,6 +27,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import './styling/DashboardStyles.scss'
+import {API_URL} from "../config/constants";
 
 interface DataRow {
   title: string;
@@ -42,7 +43,7 @@ function Administration() {
   const handleOnSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     let result = await fetch(
-      'http://localhost:5001/register', {
+      API_URL + '/register', {
         method: "post",
         body: JSON.stringify({name, email}),
         headers: {
@@ -66,7 +67,7 @@ function Administration() {
     }
   }
   const fetchUsers = async () => {
-    const data = await fetch('http://localhost:5001/users');
+    const data = await fetch(API_URL + '/users');
     data.json().then(r => setUsers(r))
   }
   useEffect(() => {
