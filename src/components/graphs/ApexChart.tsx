@@ -5,8 +5,6 @@ import {ApexOptions} from "apexcharts";
 interface ApexChartProps {}
 
 const ApexChart: React.FC<ApexChartProps> = () => {
-
-
   const chartOptions: ApexOptions = {
     chart: {
       type: 'line',

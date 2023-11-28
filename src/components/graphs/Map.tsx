@@ -33,7 +33,7 @@ export const Map = ({ width, height, data }: MapProps) => {
 
   return (
     <div id='chart'>
-      <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} preserveAspectRatio="xMinYMid">
+      <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} preserveAspectRatio="xMinYMid" id='map'>
         {allSvgPaths}
       </svg>
     </div>
