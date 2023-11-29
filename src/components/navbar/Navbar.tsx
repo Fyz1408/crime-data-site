@@ -31,9 +31,10 @@ const NavLink = (props: Props) => {
       py={1}
       rounded={'md'}
       className={isActive ? 'bold' : ''}
+      border={isActive ? 'solid #ebc34d' : 'solid #E2E8F0'}
       _hover={{
         textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
+        bg: useColorModeValue('solid gray.200', 'gray.700'),
       }}
       href={'/' + href}>
       {children}
@@ -68,22 +69,22 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Flex flexDir='row' w='20vh'>
+            <Flex flexDir='row' w='0vh'>
               <Heading size='md'>
                 Crime Analysis
               </Heading>
             </Flex>
-            <HStack as={'nav'} spacing={4} display={{base: 'none', md: 'flex'}}>
-              {Links.map((link) => (
-                <NavLink
-                  key={link}
-                  href={link.toLowerCase()}
-                  isActive={'/' + link.toLowerCase() === path}
-                >
-                  {link}
-                </NavLink>
-              ))}
-            </HStack>
+          </HStack>
+          <HStack as={'nav'} spacing={4} display={{base: 'none', md: 'flex'}}>
+            {Links.map((link) => (
+              <NavLink
+                key={link}
+                href={link.toLowerCase()}
+                isActive={'/' + link.toLowerCase() === path}
+              >
+                {link}
+              </NavLink>
+            ))}
           </HStack>
           <IconButton
             icon={colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
