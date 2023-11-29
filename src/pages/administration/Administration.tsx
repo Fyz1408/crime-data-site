@@ -26,8 +26,8 @@ import {
   Tr,
   useToast
 } from "@chakra-ui/react";
-import './styling/DashboardStyles.scss'
-import {API_URL} from "../config/constants";
+import '../dashboard/DashboardStyles.scss'
+import {API_URL} from "../../config/constants";
 
 interface DataRow {
   title: string;

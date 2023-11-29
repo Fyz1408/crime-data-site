@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Center, Divider, Flex, Heading} from "@chakra-ui/react";
 import * as d3 from "d3";
-import {Map} from "../components/graphs/Map"
+import {Map} from "../../components/graphs/Map"
 import {FeatureCollection} from "geojson";
-import states from "../data/states.json"
+import states from "../../data/states.json"
 
 
 interface IProps {

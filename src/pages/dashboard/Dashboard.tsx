@@ -1,40 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {
-  Box,
-  Card,
-  CardBody,
-  CardHeader,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  Progress,
-  SimpleGrid,
-  Spinner,
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useToast
-} from "@chakra-ui/react";
-import './styling/DashboardStyles.scss'
-import {Crime, CrimeWeapon} from "../types/CrimeTypes";
-import DonutChart from "../components/graphs/DonutChart";
-import {API_URL} from "../config/constants";
-import ExampleDonut from "../components/graphs/ExampleDonut";
-import ExampleChart from "../components/graphs/ExampleChart";
-import {DonutData, PieData} from "../types/ChartTypes";
-import PieChart from "../components/graphs/PieChart";
-
-interface DataRow {
-  title: string;
-  year: string;
-}
+import {Box, Center, Divider, Flex, Heading, Progress, SimpleGrid, Text} from "@chakra-ui/react";
+import './DashboardStyles.scss'
+import {CrimeWeapon} from "../../types/CrimeTypes";
+import DonutChart from "../../components/graphs/DonutChart";
+import {API_URL} from "../../config/constants";
+import ExampleDonut from "../../components/graphs/ExampleDonut";
+import ExampleChart from "../../components/graphs/ExampleChart";
+import {DonutData, PieData} from "../../types/ChartTypes";
+import PieChart from "../../components/graphs/PieChart";
+import CrimeTable from "./CrimeTable";
 
 
 function Dashboard() {
@@ -42,14 +16,8 @@ function Dashboard() {
   const [crimeCount, setCrimeCount] = useState<number>(0);
   const [crimeVictims, setCrimeVictims] = useState<DonutData[]>([]);
   const [crimeWeapons, setCrimeWeapons] = useState<PieData[]>([]);
-  const [crimes, setCrimes] = useState<Crime[]>([]);
-  const toast = useToast()
 
   const fetchCrime = async () => {
-    await fetch(API_URL + '/crime').then(response => {
-      response.json().then(json => setCrimes(json))
-    })
-
     await fetch(API_URL + '/crime/count').then(response => {
       response.json().then(json => setCrimeCount(json))
     })
@@ -60,16 +28,17 @@ function Dashboard() {
 
     data.json().then(response => {
       if (response && response.length > 0) {
-        const sanitizedResponse = response.map((item: CrimeWeapon) => ({
-          ...item,
-          label: item._id !== null ? FormatString(item._id) : 'No weapon',
-        }));
+        const sanitizedResponse = response
+          .filter((item: CrimeWeapon) => item.count >= 2000)
+          .map((item: CrimeWeapon) => ({
+            ...item,
+            label: item._id !== null ? FormatString(item._id) : 'No weapon',
+          }));
 
         setCrimeWeapons(sanitizedResponse);
       }
     })
   }
-
   const fetchCrimeVictims = async () => {
     const data = await fetch(API_URL + '/crime/genders');
 
@@ -109,7 +78,7 @@ function Dashboard() {
         <>
           <Flex h='80vh' w='100%' alignItems='center' justifyContent='center' flexDir='column'>
             <Box p={25}>
-              <Heading size='xl'> Getting data.. </Heading>
+              <Heading size='xl'> Loading Dashboard.. </Heading>
               <Progress size='lg' isIndeterminate colorScheme='teal' borderRadius='15px'/>
             </Box>
           </Flex>
@@ -128,10 +97,13 @@ function Dashboard() {
 
             <Divider mt={3}/>
 
-            <SimpleGrid minChildWidth='600px' spacing='40px' mt={10} mr={7} ml={7} columns={3}>
+            <SimpleGrid minChildWidth='600px' spacing='40px' mt={10} mr={7} ml={7} columns={2}>
               <Box>
                 <Heading size='md' display='flex'>
                   Gender of the victims
+                </Heading>
+                <Heading size='xs' color='gray.400' display='flex'>
+                  Other can be animals, privacy reasons, etc..
                 </Heading>
                 <DonutChart data={crimeVictims}/>
               </Box>
@@ -139,6 +111,9 @@ function Dashboard() {
               <Box>
                 <Heading size='md' display='flex'>
                   Most popular weapons used
+                </Heading>
+                <Heading size='xs' color='gray.400' display='flex'>
+                  Only weapons with a count higher than 2000 is shown
                 </Heading>
                 <PieChart data={crimeWeapons}/>
               </Box>
@@ -168,45 +143,9 @@ function Dashboard() {
 
           <Divider/>
 
-          <Flex flexDir='column' mt={10} mb={10}>
+          <Flex flexDir='column' mt={10} mb={10} h='100%'>
             <Center>
-              <Card>
-                <CardHeader>
-                  <Heading as='h2'>
-                    Crime table
-                  </Heading>
-                </CardHeader>
-                <CardBody>
-                  <TableContainer>
-                    <Table variant='striped'>
-                      <TableCaption> Crime </TableCaption>
-                      <Thead>
-                        <Tr>
-                          <Th> ID </Th>
-                          <Th> Crime desc </Th>
-                          <Th> Weapon Desc </Th>
-                          <Th> Location </Th>
-                        </Tr>
-                      </Thead>
-                      {crimes && crimes.length > 0 ? (
-                        <Tbody>
-                          {crimes.map((crime, index) => (
-                            <Tr key={index}>
-                              <Td> {crime._id} </Td>
-                              <Td> {crime["Crm Cd Desc"]} </Td>
-                              <Td> {crime["Weapon Desc"]} </Td>
-                              <Td> {crime.LOCATION} </Td>
-                            </Tr>
-                          ))}
-                        </Tbody>
-                      ) : (
-                        <Tbody>
-                        </Tbody>
-                      )}
-                    </Table>
-                  </TableContainer>
-                </CardBody>
-              </Card>
+              <CrimeTable/>
             </Center>
           </Flex>
         </>

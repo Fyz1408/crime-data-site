@@ -19,10 +19,10 @@ import {
   Text,
   useColorModeValue
 } from "@chakra-ui/react";
-import news from "../images/news.jpg";
-import mugshot from "../images/mugshot.jpg";
-import './styling/FrontpageStyles.scss';
-import ExampleChart from "../components/graphs/ExampleChart";
+import news from "../../images/news.jpg";
+import mugshot from "../../images/mugshot.jpg";
+import './FrontpageStyles.scss';
+import ExampleChart from "../../components/graphs/ExampleChart";
 
 function Frontpage() {
   function getTodaysDate() {
