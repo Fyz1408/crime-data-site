@@ -6,7 +6,6 @@ interface ExampleDonut {
 }
 
 const ExampleDonut: React.FC<ExampleDonut> = () => {
-  const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
 
     const donutOptions: ApexOptions = {
       series: [37, 43, 13,7],
@@ -25,7 +24,6 @@ const ExampleDonut: React.FC<ExampleDonut> = () => {
       }],
       theme: {
         mode: useColorModeValue('light', 'dark'),
-        palette: `palette${randomPaletteNumber}`,
       }
     };
 

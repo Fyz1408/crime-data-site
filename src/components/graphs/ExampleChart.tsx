@@ -6,7 +6,6 @@ interface ExampleChart {
 }
 
 const ExampleChart: React.FC<ExampleChart> = () => {
-  const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -26,7 +25,6 @@ const ExampleChart: React.FC<ExampleChart> = () => {
     },
     theme: {
       mode: useColorModeValue('light', 'dark'),
-      palette: `palette${randomPaletteNumber}`,
     }
   };
 

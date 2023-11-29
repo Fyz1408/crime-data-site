@@ -2,15 +2,15 @@ import React from 'react';
 import './App.scss';
 import {ChakraProvider} from "@chakra-ui/react";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Frontpage from "./pages/Frontpage";
+import Frontpage from "./pages/frontpage/Frontpage";
 import Navbar from "./components/navbar/Navbar";
 import {Footer} from "./components/footer/Footer";
-import Dashboard from "./pages/Dashboard";
-import {USMap} from "./pages/USMap";
+import Dashboard from "./pages/dashboard/Dashboard";
+import {USMap} from "./pages/usmap/USMap";
 import theme from "./theme";
 import '@fontsource/poppins';
 import '@fontsource/open-sans/700.css'
-import Administration from "./pages/Administration";
+import Administration from "./pages/administration/Administration";
 
 interface IProps {
 }
