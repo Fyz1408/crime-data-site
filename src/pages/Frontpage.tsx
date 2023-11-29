@@ -22,7 +22,7 @@ import {
 import news from "../images/news.jpg";
 import mugshot from "../images/mugshot.jpg";
 import './styling/FrontpageStyles.scss';
-import ApexChart from "../components/graphs/ApexChart";
+import ExampleChart from "../components/graphs/ExampleChart";
 
 function Frontpage() {
   function getTodaysDate() {
@@ -35,11 +35,12 @@ function Frontpage() {
       <Flex h='100vh' borderBottom='solid' borderColor='#ebc34d'>
         <Center w='100%' flexDir='column'>
           <Heading size='4xl' color='white'> Crime Analysis</Heading>
-          <Heading size='md' color='white'> Welcome to the official USA Crime Analysis website</Heading>
+          <Divider w='50%'/>
+          <Heading size='md' color='white' mt={2}> Welcome to the official USA Crime Analysis website</Heading>
           <Button
             className='crimeBtn'
             backgroundColor='#ebc34d'
-            textColor='black'
+            textColor='gray.700'
             variant='solid'
             mt={5}
             as={'a'}
@@ -52,7 +53,7 @@ function Frontpage() {
           className='bgImage'
           w='100%'
           h='inherit'
-          bgImage="url('../images/street.jpg')"
+          bgImage="url('../images/street3.jpg')"
           bgPos='bottom'
           position='absolute'
           zIndex={-10}
@@ -97,7 +98,7 @@ function Frontpage() {
             </Text>
           </CardHeader>
           <CardBody>
-            <ApexChart/>
+            <ExampleChart/>
             <Text color={useColorModeValue('blackAlpha.600', 'gray.400')} fontSize='medium'>
               We've added some new diagrams to the dashboard check them out here!
             </Text>
