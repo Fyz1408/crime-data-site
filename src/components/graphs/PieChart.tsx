@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactApexChart from "react-apexcharts";
-import {DonutData} from "../../types/ChartTypes";
-import {ApexOptions} from "apexcharts";
+import {DonutData, PieData} from "../../types/ChartTypes";
 import {useColorModeValue} from "@chakra-ui/react";
+import {ApexOptions} from "apexcharts";
 
-interface DonutChartProps {
-  data: DonutData[]
+interface PieChartProps {
+  data: PieData[]
 }
 
-const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
+const PieChart: React.FC<PieChartProps> = ({data}: PieChartProps) => {
   const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
 
   const donutOptions: ApexOptions = {
@@ -19,7 +19,7 @@ const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
       options: {
         chart: {
           width: 200,
-          type: 'pie'
+          type: 'pie',
         },
         legend: {
           position: 'bottom'
@@ -29,6 +29,9 @@ const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
     theme: {
       mode: useColorModeValue('light', 'dark'),
       //palette: `palette${randomPaletteNumber}`,
+    },
+    stroke: {
+      width: 0
     }
   };
 
@@ -37,11 +40,11 @@ const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
       <ReactApexChart
         options={donutOptions}
         series={donutOptions.series}
-        type="donut"
+        type="pie"
         height={370}
       />
     </>
   );
 };
 
-export default DonutChart;
+export default PieChart;

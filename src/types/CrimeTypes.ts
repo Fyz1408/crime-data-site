@@ -25,3 +25,8 @@ export type Crime = {
   "LAT": number,
   "LON": number
 }
+
+export type CrimeWeapon = {
+  _id: string;
+  count: number;
+}
