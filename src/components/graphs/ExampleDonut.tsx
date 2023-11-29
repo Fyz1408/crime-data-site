@@ -1,29 +1,32 @@
 import ReactApexChart from "react-apexcharts";
+import {useColorModeValue} from "@chakra-ui/react";
+import {ApexOptions} from "apexcharts";
 
-interface ExampleChart {
+interface ExampleDonut {
 }
 
-const ExampleDonut: React.FC<ExampleChart> = () => {
-    const donutOptions = {
-      series: [44, 43, 13],
-      options: {
-        chart: {
-          width: 380,
-          type: 'pie',
-        }
-      },
-      labels: ['Male', 'Female', 'Other'],
+const ExampleDonut: React.FC<ExampleDonut> = () => {
+  const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
+
+    const donutOptions: ApexOptions = {
+      series: [37, 43, 13,7],
+      labels: ['A', 'B', 'C', 'D'],
       responsive: [{
         breakpoint: 480,
         options: {
           chart: {
-            width: 200
+            width: 380,
+            type: 'pie',
           },
           legend: {
             position: 'bottom'
           }
         }
-      }]
+      }],
+      theme: {
+        mode: useColorModeValue('light', 'dark'),
+        palette: `palette${randomPaletteNumber}`,
+      }
     };
 
     return (
