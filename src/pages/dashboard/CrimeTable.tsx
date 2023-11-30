@@ -84,7 +84,7 @@ function CrimeTable() {
                 variant='flushed'
                 size='lg'
                 min={0}
-                max={10000}
+                max={100000}
                 defaultValue={25}
                 fontSize='xx-large'
                 ml={2}
@@ -92,7 +92,6 @@ function CrimeTable() {
               />
               reported crimes
             </Heading>
-
           </Flex>
         </CardHeader>
         <CardBody>
@@ -102,8 +101,8 @@ function CrimeTable() {
               <Thead>
                 <Tr>
                   <Th> ID </Th>
-                  <Th> Crime desc </Th>
-                  <Th> Weapon Desc </Th>
+                  <Th> Crime description </Th>
+                  <Th> Weapon Used </Th>
                   <Th> Location </Th>
                   <Th> Date </Th>
                 </Tr>
@@ -112,7 +111,7 @@ function CrimeTable() {
                 <Tbody>
                   {crimes.map((crime, index) => (
                     <Tr key={index}>
-                      <Td> {crime._id} </Td>
+                      <Td> {crime.DR_NO} </Td>
                       <Td> {crime["Crm Cd Desc"]} </Td>
                       <Td> {crime["Weapon Desc"]} </Td>
                       <Td> {crime.LOCATION} </Td>
