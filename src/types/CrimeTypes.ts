@@ -30,3 +30,8 @@ export type CrimeWeapon = {
   _id: string;
   count: number;
 }
+
+export type CrimeDate = {
+  _id: string;
+  count: number;
+};
