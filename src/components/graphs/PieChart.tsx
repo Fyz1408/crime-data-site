@@ -9,9 +9,8 @@ interface PieChartProps {
 }
 
 const PieChart: React.FC<PieChartProps> = ({data}: PieChartProps) => {
-  const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
 
-  const donutOptions: ApexOptions = {
+  const chartOptions: ApexOptions = {
     series: data.map(item => item.count),
     labels: data.map(item => item.label),
     responsive: [{
@@ -28,7 +27,6 @@ const PieChart: React.FC<PieChartProps> = ({data}: PieChartProps) => {
     }],
     theme: {
       mode: useColorModeValue('light', 'dark'),
-      //palette: `palette${randomPaletteNumber}`,
     },
     stroke: {
       width: 0
@@ -38,8 +36,8 @@ const PieChart: React.FC<PieChartProps> = ({data}: PieChartProps) => {
   return (
     <>
       <ReactApexChart
-        options={donutOptions}
-        series={donutOptions.series}
+        options={chartOptions}
+        series={chartOptions.series}
         type="pie"
         height={370}
       />

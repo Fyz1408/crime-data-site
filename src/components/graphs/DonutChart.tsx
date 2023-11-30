@@ -9,9 +9,7 @@ interface DonutChartProps {
 }
 
 const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
-  const randomPaletteNumber = Math.floor(Math.random() * 10) + 1;
-
-  const donutOptions: ApexOptions = {
+  const chartOptions: ApexOptions = {
     series: data.map(item => item.count),
     labels: data.map(item => item.label),
     responsive: [{
@@ -28,15 +26,14 @@ const DonutChart: React.FC<DonutChartProps> = ({data}: DonutChartProps) => {
     }],
     theme: {
       mode: useColorModeValue('light', 'dark'),
-      //palette: `palette${randomPaletteNumber}`,
     }
   };
 
   return (
     <>
       <ReactApexChart
-        options={donutOptions}
-        series={donutOptions.series}
+        options={chartOptions}
+        series={chartOptions.series}
         type="donut"
         height={370}
       />
