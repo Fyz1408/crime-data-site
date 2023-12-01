@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Center, Divider, Flex, Heading, Text} from "@chakra-ui/react";
 import './DashboardStyles.scss'
 import CrimeTable from "./CrimeTable";
-import Charts from "./Charts";
+import Charts from "./charts/Charts";
 import {API_URL} from "../../config/constants";
 
 

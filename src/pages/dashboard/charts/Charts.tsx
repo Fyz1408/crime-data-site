@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Box, Flex, Heading, HStack, Progress, ScaleFade, Select, SimpleGrid} from "@chakra-ui/react";
-import './DashboardStyles.scss'
-import {CrimeDate, CrimeWeapon} from "../../types/CrimeTypes";
-import DonutChart from "../../components/graphs/DonutChart";
-import {API_URL} from "../../config/constants";
-import ExampleDonut from "../../components/graphs/ExampleDonut";
-import ExampleChart from "../../components/graphs/ExampleChart";
-import {DonutData, HeatMapData, Month, PieData} from "../../types/ChartTypes";
-import PieChart from "../../components/graphs/PieChart";
-import HeatMap from "../../components/graphs/HeatMap";
+import '../DashboardStyles.scss'
+import {CrimeDate, CrimeWeapon} from "../../../types/CrimeTypes";
+import DonutChart from "../../../components/graphs/DonutChart";
+import {API_URL} from "../../../config/constants";
+import {ColumnData, DonutData, HeatMapData, Month, PieData} from "../../../types/ChartTypes";
+import PieChart from "../../../components/graphs/PieChart";
+import HeatMap from "../../../components/graphs/HeatMap";
+import ColumnChart from "../../../components/graphs/ColumnChart";
 
 
 function Charts() {
@@ -16,7 +15,7 @@ function Charts() {
   const [crimeVictims, setCrimeVictims] = useState<DonutData[]>([]);
   const [crimeWeapons, setCrimeWeapons] = useState<PieData[]>([]);
   const [crimeDates, setCrimeDates] = useState<HeatMapData[]>([]);
-
+  const [crimeStreets, setCrimeStreets] = useState<ColumnData[]>([]);
   const fetchCrimeWeapons = async () => {
     const data = await fetch(API_URL + '/crime/weapons');
 
@@ -48,12 +47,12 @@ function Charts() {
     })
   }
 
-  const fetchCrimeDates = async () => {
-    const data = await fetch(API_URL + '/crime/date');
+  const fetchCrimeArea = async () => {
+    const data = await fetch(API_URL + '/crime/area');
 
     data.json().then(res => {
         if (res && res.length > 0) {
-
+          setCrimeStreets(res)
         }
       }
     )
@@ -64,26 +63,26 @@ function Charts() {
 
     data.json().then(res => {
         if (res && res.length > 0) {
-          const heatMapData: HeatMapData[] = res.reduce((result: HeatMapData[], crimeDate: CrimeDate ) => {
+          const heatMapData: HeatMapData[] = res.reduce((result: HeatMapData[], crimeDate: CrimeDate) => {
             const date = new Date(crimeDate._id);
-            const month = date.toLocaleString('en-US', { month: 'long' });
-            const day = date.toLocaleString('en-US', { day: 'numeric' });
+            const month = date.toLocaleString('en-US', {month: 'long'});
+            const day = date.toLocaleString('en-US', {day: 'numeric'});
 
             // Find the month in the result array
             let monthItem = result.find((item) => item.month === month);
 
             // If the month doesn't exist, we create a new month object
             if (!monthItem) {
-              monthItem = { month, monthData: [] };
+              monthItem = {month, monthData: []};
               result.push(monthItem);
             }
 
             // Add day & count to the monthData array and afterward sort
-            monthItem.monthData.push({ day, count: crimeDate.count });
+            monthItem.monthData.push({day, count: crimeDate.count});
             monthItem.monthData.sort((a: Month, b: Month) => parseInt(a.day) - parseInt(b.day));
 
             return result
-            }, []);
+          }, []);
 
           // Sort the months in correct order
           heatMapData.sort((a, b) => {
@@ -92,7 +91,7 @@ function Charts() {
               "July", "August", "September", "October", "November", "December"
             ];
 
-            return monthsOrder.indexOf(a.month) - monthsOrder.indexOf(b.month);
+            return monthsOrder.indexOf(b.month) - monthsOrder.indexOf(a.month);
           });
 
           setCrimeDates(heatMapData);
@@ -105,6 +104,7 @@ function Charts() {
     const selectedYear = value !== "" ? value : '2023';
     fetchCrimeDatesYear(selectedYear);
   }
+
   function FormatString(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
@@ -113,6 +113,7 @@ function Charts() {
     Promise.all([
       fetchCrimeVictims(),
       fetchCrimeWeapons(),
+      fetchCrimeArea(),
       fetchCrimeDatesYear('2023')
     ])
       .then(() => setIsLoading(false))
@@ -158,22 +159,12 @@ function Charts() {
 
             <Box>
               <Heading size='md' display='flex'>
-                Crimes in each month
+                Crime sorted by area
               </Heading>
-              <ExampleChart/>
-            </Box>
-
-            <Box>
-              <Heading size='md' display='flex'>
-                Crimes sorted by streets
+              <Heading size='xs' color='gray.400' display='flex'>
+                See where most crime is committed
               </Heading>
-              <ExampleChart/>
-            </Box>
-            <Box>
-              <Heading size='md' display='flex'>
-                Crime descriptions
-              </Heading>
-              <ExampleDonut/>
+              <ColumnChart data={crimeStreets}/>
             </Box>
 
             <Box>
@@ -194,7 +185,6 @@ function Charts() {
                   <option value='2020'>2020</option>
                 </Select>
               </HStack>
-
               <Heading size='xs' color='gray.400' display='flex'>
                 We only have data from 1 January 2020 to 13 November 2023
               </Heading>
