@@ -22,7 +22,7 @@ import {
 import news from "../../images/news.jpg";
 import mugshot from "../../images/mugshot.jpg";
 import './FrontpageStyles.scss';
-import ExampleChart from "../../components/graphs/ExampleChart";
+import ExampleColumn from "../../components/graphs/examples/ExampleColumn";
 
 function Frontpage() {
   function getTodaysDate() {
@@ -98,13 +98,18 @@ function Frontpage() {
             </Text>
           </CardHeader>
           <CardBody>
-            <ExampleChart/>
+            <ExampleColumn/>
             <Text color={useColorModeValue('blackAlpha.600', 'gray.400')} fontSize='medium'>
               We've added some new diagrams to the dashboard check them out here!
             </Text>
           </CardBody>
           <CardFooter>
-            <Button>Login here</Button>
+            <Button
+              as={'a'}
+              href={'/dashboard'}
+            >
+              Go to dashboard
+            </Button>
           </CardFooter>
         </Card>
 

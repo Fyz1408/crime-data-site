@@ -8,6 +8,11 @@ export type PieData = {
   count: number;
 }
 
+export type ColumnData = {
+  _id: string;
+  count: number;
+}
+
 export type HeatMapData = {
   month: string
   monthData: Month[]
