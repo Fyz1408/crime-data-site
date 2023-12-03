@@ -1,37 +1,22 @@
 # Crime data analysis site
-## Available Scripts
+A small analysis site for a school project to experiment with big data and a bit of client side 
 
-In the project directory, you can run:
+# Frontpage
+A simple frontpage with some news and a contact formula
+<img width="1439" alt="Screenshot 2023-12-03 at 17 25 35" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/435d9971-e452-498b-b235-5bbd04949703">
+<img width="1438" alt="Screenshot 2023-12-03 at 20 03 51" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/febde3ee-a321-4935-a6cb-e77c74862bd2">
+<img width="1440" alt="Screenshot 2023-12-03 at 20 04 02" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/026d8410-3804-4a56-a67f-9836a1eca673">
 
-### `npm start`
+# Dashboard
+Graphs were made with ApexCharts and data is from a Los Angeles Dataset with over 830k documents of crimes committed from 2020 to 2023
+<img width="1439" alt="Screenshot 2023-12-03 at 20 02 10" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/ec4b4f7b-c088-4f06-9477-7151f5546cf0">
+<img width="1438" alt="Screenshot 2023-12-03 at 20 02 36" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/c638db93-d249-4c0f-b92a-15f2fca20a9f">
+<img width="1437" alt="Screenshot 2023-12-03 at 20 03 33" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/ee673e56-4459-4c1a-98fb-fbca759017ec">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# US Map
+I ran out of time but this map is a svg drawn with D3JS and was supposed to display crime rates in the US
+<img width="1440" alt="Screenshot 2023-12-03 at 20 04 16" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/0c4d5524-4b9c-4607-b8fb-cd25c33a19d2">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Administration
+Administration page to read messages and create new users
+<img width="1440" alt="Screenshot 2023-12-03 at 20 06 25" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/6a8e62d5-7fec-4f7e-9a14-9b3e3f5df88d">
