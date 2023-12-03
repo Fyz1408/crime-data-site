@@ -18,5 +18,6 @@ I ran out of time but this map is a svg drawn with D3JS and was supposed to disp
 <img width="1440" alt="Screenshot 2023-12-03 at 20 04 16" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/0c4d5524-4b9c-4607-b8fb-cd25c33a19d2">
 
 # Administration
-Administration page to read messages and create new users
+Simple administration page with Login to read messages and create new users
+<img width="1438" alt="Screenshot 2023-12-03 at 22 20 49" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/d4576aca-0e22-4d00-9143-3a86b1a325b3">
 <img width="1440" alt="Screenshot 2023-12-03 at 20 06 25" src="https://github.com/Fyz1408/crime-data-site/assets/83246024/6a8e62d5-7fec-4f7e-9a14-9b3e3f5df88d">
