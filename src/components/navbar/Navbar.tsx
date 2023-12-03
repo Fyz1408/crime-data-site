@@ -69,7 +69,7 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Flex flexDir='row' w='0vh'>
+            <Flex flexDir='row' >
               <Heading size='md'>
                 Crime Analysis
               </Heading>
