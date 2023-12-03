@@ -1,77 +1,38 @@
 import React, {useEffect, useState} from "react";
 import {
-  Box,
-  Button,
-  ButtonGroup,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Center,
   Divider,
   Flex,
   Heading,
-  Input,
-  SimpleGrid,
-  Stack,
-  StackDivider,
   Table,
   TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
-  Tr,
-  useToast
+  Tooltip,
+  Tr
 } from "@chakra-ui/react";
 import '../dashboard/DashboardStyles.scss'
+import UserForm from "./UserForm";
+import {Message} from "../../types/ApiTypes";
 import {API_URL} from "../../config/constants";
 
-interface DataRow {
-  title: string;
-  year: string;
-}
 
 function Administration() {
-  const [users, setUsers] = useState<any[]>([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const toast = useToast()
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  const handleOnSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    let result = await fetch(
-      API_URL + '/register', {
-        method: "post",
-        body: JSON.stringify({name, email}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    result = await result.json();
-    console.warn(result);
-    if (result) {
-      fetchUsers();
-      toast({
-        title: 'Data saved succesfully.',
-        description: "A user was created",
-        position: 'bottom',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      })
-      setEmail("");
-      setName("");
-    }
+  const fetchMessages = async () => {
+    const data = await fetch(API_URL + '/messages');
+    data.json().then(r => setMessages(r))
   }
-  const fetchUsers = async () => {
-    const data = await fetch(API_URL + '/users');
-    data.json().then(r => setUsers(r))
-  }
+
   useEffect(() => {
-    fetchUsers().catch(console.error);
+    fetchMessages().catch(console.error);
   }, [])
 
   return (
@@ -86,79 +47,42 @@ function Administration() {
         <Divider mt={3}/>
       </Flex>
 
-
-      <SimpleGrid spacing='40px' mr={7} ml={7} mt={10} mb={10} minChildWidth='320px'>
-        <Card mr={6} ml={6}>
-          <form action="">
-            <CardHeader>
-              <Heading as='h2'>
-                Create a user
-              </Heading>
-            </CardHeader>
-            <CardBody>
-              <Stack divider={<StackDivider/>} spacing='4'>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    Enter name
-                  </Heading>
-                  <Text pt='2' fontSize='sm'>
-                    <Input
-                      type='text'
-                      placeholder="Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </Text>
-                </Box>
-                <Box>
-                  <Heading size='xs' textTransform='uppercase'>
-                    Enter email
-                  </Heading>
-                  <Text pt='2' fontSize='sm'>
-                    <Input
-                      type='email'
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Text>
-                </Box>
-              </Stack>
-            </CardBody>
-            <CardFooter>
-              <ButtonGroup spacing='2'>
-                <Button type="submit" onClick={handleOnSubmit} colorScheme='green'>
-                  Submit
-                </Button>
-              </ButtonGroup>
-            </CardFooter>
-          </form>
-        </Card>
-        <Card mr={6} ml={6}>
+      <Flex justifyContent='center'>
+        <Card mt={10} mr={25} ml={25} mb={5} w='100%'>
           <CardHeader>
-            <Heading as='h2'>
-              User table
-            </Heading>
+            <Flex flexDir='row'>
+              <Heading w='100%'>
+                Latest messages
+              </Heading>
+            </Flex>
           </CardHeader>
           <CardBody>
             <TableContainer>
-              <Table variant='striped'>
-                <TableCaption> Users </TableCaption>
+              <Table variant='striped' colorScheme='teal'>
+                <TableCaption> Messages </TableCaption>
                 <Thead>
                   <Tr>
-                    <Th> ID </Th>
+                    <Th> Date </Th>
                     <Th> Name </Th>
-                    <Th> Mail</Th>
+                    <Th> Email </Th>
+                    <Th> Message </Th>
                   </Tr>
                 </Thead>
-                {users && users.length > 0 ? (
+                {messages && messages.length > 0 ? (
                   <Tbody>
-                    {users.map((user, index) => (
-                      <Tr key={index}>
-                        <Td> {user._id} </Td>
-                        <Td> {user.name} </Td>
-                        <Td> {user.email} </Td>
-                      </Tr>
+                    {messages.map((message, index) => (
+                      <Tooltip
+                        label={`Full message: ${message.message}`}
+                      >
+                        <Tr key={index}>
+                          <Td>{new Date(message.date).toLocaleString('en-GB', {timeZone: 'UTC'})}</Td>
+                          <Td> {message.name} </Td>
+                          <Td> {message.email} </Td>
+                          <Td maxW='500px' overflowX='hidden' textOverflow='ellipsis'>
+                            {message.message}
+                          </Td>
+                        </Tr>
+                      </Tooltip>
                     ))}
                   </Tbody>
                 ) : (
@@ -169,8 +93,9 @@ function Administration() {
             </TableContainer>
           </CardBody>
         </Card>
-      </SimpleGrid>
+      </Flex>
 
+      <UserForm/>
     </>
   );
 }

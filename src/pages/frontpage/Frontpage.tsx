@@ -9,11 +9,8 @@ import {
   Center,
   Divider,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   Image,
-  Input,
   SimpleGrid,
   Stack,
   Text,
@@ -23,6 +20,7 @@ import news from "../../images/news.jpg";
 import mugshot from "../../images/mugshot.jpg";
 import './FrontpageStyles.scss';
 import ExampleColumn from "../../components/graphs/examples/ExampleColumn";
+import ContactForm from "./ContactForm";
 
 function Frontpage() {
   function getTodaysDate() {
@@ -33,7 +31,7 @@ function Frontpage() {
   return (
     <>
       <Flex h='100vh' borderBottom='solid' borderColor='#ebc34d'>
-        <Center w='100%' flexDir='column'>
+        <Center w='100%' flexDir='column' textAlign='center'>
           <Heading size='4xl' color='white'> Crime Analysis</Heading>
           <Divider w='50%'/>
           <Heading size='md' color='white' mt={2}> Welcome to the official USA Crime Analysis website</Heading>
@@ -85,7 +83,12 @@ function Frontpage() {
             </Stack>
           </CardBody>
           <CardFooter>
-            <Button>Read more here</Button>
+            <Button
+              target='_blank'
+              as='a'
+              href='https://montreal.ctvnews.ca/organized-crime-kingpin-gregory-woolley-gunned-down-near-montreal-1.6649685'>
+              Read more here
+            </Button>
           </CardFooter>
         </Card>
 
@@ -142,41 +145,9 @@ function Frontpage() {
 
       <Divider mt={10}/>
 
-      <Flex h='70vh' alignItems='center' placeContent='center'>
-        <Box bg='blackAlpha.300' h='90%' w='90%' m={15}>
-        </Box>
-      </Flex>
-
-      <Divider mt={10}/>
-
-      <Flex h='70vh'>
+      <Flex h='80vh' mt={4} mb={4}>
         <Center w='100%'>
-          <Card h='auto' minW='320px' maxW='1000px' w='100%' p={2} mr={6} ml={6}>
-            <FormControl>
-              <CardHeader>
-                <Heading size='lg'> Contact us </Heading>
-              </CardHeader>
-              <CardBody>
-                <FormLabel>Name</FormLabel>
-                <Input type='text' placeholder='Enter name'/>
-
-                <FormLabel mt={3}>Email address</FormLabel>
-                <Input type='email' placeholder='Enter email'/>
-
-                <FormLabel mt={3}> Message </FormLabel>
-                <Input type='text' minH='15vh' placeholder='Enter your message here'/>
-              </CardBody>
-              <CardFooter>
-                <Button
-                  mt={4}
-                  colorScheme='yellow'
-                  type='submit'
-                >
-                  Submit
-                </Button>
-              </CardFooter>
-            </FormControl>
-          </Card>
+          <ContactForm/>
         </Center>
       </Flex>
     </>

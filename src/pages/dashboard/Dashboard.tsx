@@ -39,7 +39,7 @@ function Dashboard() {
   return (
     <>
       <Flex h='10vh'></Flex>
-      <Flex flexDir='column'>
+      <Flex flexDir='column' minW='600px'>
         <Flex flexDir='column' alignSelf='center' alignItems='center'>
           <Heading size='xl'>
             Dashboard
@@ -56,7 +56,7 @@ function Dashboard() {
 
       <Divider/>
 
-      <Flex flexDir='column' mt={10} mb={10} h='100%'>
+      <Flex flexDir='column' mt={10} mb={10} h='100%' minW='600px'>
         <Center>
           <CrimeTable/>
         </Center>
