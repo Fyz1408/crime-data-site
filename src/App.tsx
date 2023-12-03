@@ -10,7 +10,7 @@ import {USMap} from "./pages/usmap/USMap";
 import theme from "./theme";
 import '@fontsource/poppins';
 import '@fontsource/open-sans/700.css'
-import Administration from "./pages/administration/Administration";
+import Login from "./pages/administration/Login";
 
 interface IProps {
 }
@@ -30,7 +30,7 @@ class App extends React.Component<IProps, IState> {
               <Route path="/*" element={<Frontpage/>} />
               <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="/map" element={<USMap/>}/>
-              <Route path="/administration" element={<Administration/>}/>
+              <Route path="/login" element={<Login/>}/>
             </Routes>
             <Footer/>
           </BrowserRouter>

@@ -37,7 +37,6 @@ function Administration() {
 
   return (
     <>
-      <Flex h='10vh'></Flex>
       <Flex flexDir='column'>
         <Center>
           <Heading size='xl'>

@@ -19,7 +19,7 @@ interface Props {
   isActive: boolean,
 }
 
-const Links = ['Home', 'Dashboard', 'Map', 'Administration']
+const Links = ['Home', 'Dashboard', 'Map', 'Login']
 
 const NavLink = (props: Props) => {
   const {children, href, isActive} = props
