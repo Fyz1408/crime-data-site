@@ -64,7 +64,7 @@ export class USMap extends Component<IProps, IState> {
         <Flex flexDir='column'>
           <Center>
             <Heading size='xl'>
-              Map overview of crime
+              Map overview of all crime in the US
             </Heading>
           </Center>
           <Divider mt={3}/>

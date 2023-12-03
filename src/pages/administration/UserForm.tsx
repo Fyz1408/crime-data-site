@@ -35,7 +35,7 @@ function UserForm() {
   const toast = useToast()
 
   const handleOnSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
+    e.preventDefault(); // Used to prevent the default form submission behavior which is a page reload.
     let result = await fetch(
       API_URL + '/users/register', {
         method: "post",
@@ -45,7 +45,7 @@ function UserForm() {
         }
       })
     result = await result.json();
-    console.warn(result);
+
     if (result) {
       fetchUsers();
       toast({

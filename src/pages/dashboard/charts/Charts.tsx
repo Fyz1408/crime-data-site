@@ -16,6 +16,7 @@ function Charts() {
   const [crimeWeapons, setCrimeWeapons] = useState<PieData[]>([]);
   const [crimeDates, setCrimeDates] = useState<HeatMapData[]>([]);
   const [crimeStreets, setCrimeStreets] = useState<ColumnData[]>([]);
+
   const fetchCrimeWeapons = async () => {
     const data = await fetch(API_URL + '/crime/weapons');
 
@@ -136,7 +137,7 @@ function Charts() {
         </>
       ) : (
         <ScaleFade in={!isLoading}>
-          <SimpleGrid minChildWidth='600px' spacing='40px' mt={10} mr={7} ml={7} columns={2}>
+          <SimpleGrid minChildWidth='390px' spacing='40px' mt={10} mr={7} ml={7} columns={2}>
             <Box>
               <Heading size='md' display='flex'>
                 Gender of the victims
@@ -156,7 +157,8 @@ function Charts() {
               </Heading>
               <PieChart data={crimeWeapons}/>
             </Box>
-
+          </SimpleGrid>
+          <SimpleGrid minChildWidth='390px' spacing='40px' mt={10} mr={7} ml={7}>
             <Box>
               <Heading size='md' display='flex'>
                 Crime sorted by area
