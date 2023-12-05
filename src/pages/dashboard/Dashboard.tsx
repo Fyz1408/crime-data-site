@@ -7,13 +7,10 @@ import {API_URL} from "../../config/constants";
 
 
 function Dashboard() {
-  const [crimeCount, setCrimeCount] = useState<number>(0);
   const fetchCrime = async () => {
     await fetch(API_URL + '/crime/count').then(response => {
       response.json().then(json => {
-        setCrimeCount(json)
         const counters = document.querySelectorAll('.count');
-
         counters.forEach((counter) => {
           const updateCount = () => {
             const count = parseInt(counter.innerHTML);

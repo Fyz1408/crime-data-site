@@ -140,7 +140,6 @@ function Frontpage() {
             <Button> See more arrest here</Button>
           </CardFooter>
         </Card>
-
       </SimpleGrid>
 
       <Divider mt={10}/>
